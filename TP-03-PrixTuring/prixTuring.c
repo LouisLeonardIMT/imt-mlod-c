@@ -1,13 +1,10 @@
 /**
  Compilation
  gcc --std=c99 -W -Wall -o prixTuring prixTuring.c
-
  Exécution
  ./prixTuring < turingWinners.txt > out.txt
-
  Tests
  diff out.txt turingWinners.txt
-
  Détection de fuites mémoires
  valgrind --leak-check=yes --leak-check=full --show-leak-kinds=all --show-reachable=no ./prixTuring < turingWinners.txt > out.txt
 **/
@@ -48,12 +45,40 @@ int scanLineAsInt() {
 	return buf;
 }
 
+typedef struct{
+	int annee;
+	char* nom;
+	char* travaux;
+} Gagnant;
+
+Gagnant *renvoieUnGagnant(){
+	Gagnant *leMeilleur;
+	leMeilleur=malloc(sizeof(Gagnant));
+	leMeilleur->annee=scanLineAsInt();
+	leMeilleur->nom=scanLine();
+	leMeilleur->travaux=scanLine();
+	return(leMeilleur);
+}
+
+void afficheUnGagnant(Gagnant G){
+	printf("%i\n", G.annee);
+	printf("%s\n", G.nom);
+	printf("%s\n", G.travaux);
+}
+
+Gagnant[50] readWinners(){
+	
 
 int main(void)
 {
 
 	int nbGagnants = scanLineAsInt();
 	printf("nbGagnants = %i\n",nbGagnants);
-
+	
+	Gagnant *test;
+	test = renvoieUnGagnant();
+	afficheUnGagnant(*test);
+	free(test);
+	
 	return EXIT_SUCCESS;
 }

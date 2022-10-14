@@ -11,12 +11,18 @@ bool estVide(Liste l) {
 
 // créer une liste d'un seul élément contenant la valeur v
 Liste creer(Element v){
-	return TODO;
+	Liste l = malloc(sizeof(Liste));
+	l->val=v;
+	l->suiv=NULL;
+	return l;
 }
 
 // ajoute l'élément v en tete de la liste l
 Liste ajoutTete(Element v, Liste l) {
-	return TODO;
+	Liste l1 = creer(v);
+	l1->val=v;
+	l1->suiv=l;
+	return l1;
 }
 
 
@@ -30,12 +36,34 @@ void afficheElement(Element e) {
 // Attention la liste peut être vide !
 // version itérative
 void afficheListe_i(Liste l) {
-	TODO;
+	while(!estVide(l)){
+		afficheElement(l->val);
+		l=l->suiv;
+	}
 }
 
 // version recursive
 void afficheListe_r(Liste l) {
-	TODO;
+	if(estVide(l)){
+		return;
+	}
+	else{
+		afficheElement(l->val);
+		afficheListe_r(l->suiv);
+	}
+	return;
+}
+
+int main(void){
+	printf("test");
+	Liste L;
+	L=creer(3);
+	printf("%i", estVide(L));
+	afficheListe_i(L);
+	printf("\n");
+	L=ajoutTete(5,L);
+	afficheListe_i(L);
+	afficheListe_r(L);
 }
 
 void detruireElement(Element e) {}
@@ -43,9 +71,11 @@ void detruireElement(Element e) {}
 // Détruit tous les éléments de la liste l
 // version itérative
 void detruire_i(Liste l) {
+	
 	TODO;
 }
 
+/*
 // version récursive
 void detruire_r(Liste l) {
 	TODO;
@@ -96,5 +126,5 @@ void afficheEnvers_r(Liste l) {
 	TODO;
 }
 
-
+*/
 

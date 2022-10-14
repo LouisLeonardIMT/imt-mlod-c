@@ -102,6 +102,23 @@ void sortTuringWinnersByYear(Gagnant *l, int nbGagnants){
 	}
 }
 
+/*Gagnant* addNewWinner(Gagnant *l, int *pNbGagnants){
+	Gagnant *nl=malloc((*pNbGagnants+1)*sizeof(Gagnant));
+	for(int k=0; k<*pNbGagnants; k++){
+		nl[k]=l[k];
+	}
+	Gagnant *nouveau=malloc(sizeof(Gagnant));
+	printf("Entrer une annee : ");
+	scanf("%i", &(nouveau->annee));
+	printf("Entrer la.e.s gagnant.e.s : ");
+	scanf("%s", (nouveau->nom));
+	printf("Nature des travaux : ");
+	scanf("%s", (nouveau->travaux));
+	*pNbGagnants+=1;
+	nl[*pNbGagnants]=*nouveau;
+	return nl;
+}*/
+
 int main(void)
 {
 
@@ -110,9 +127,6 @@ int main(void)
 	
 	Gagnant *listeGagnants;
 	listeGagnants=readWinners(nbGagnants);
-	
-	sortTuringWinnersByYear(listeGagnants, nbGagnants);
-	printWinners(listeGagnants, nbGagnants);
 	
 	// free
 	for(int k=0; k<nbGagnants; k++){

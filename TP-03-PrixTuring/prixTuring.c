@@ -51,6 +51,7 @@ typedef struct{
 	char* travaux;
 } Gagnant;
 
+
 Gagnant *renvoieUnGagnant(){
 	Gagnant *leMeilleur;
 	leMeilleur=malloc(sizeof(Gagnant));
@@ -60,14 +61,26 @@ Gagnant *renvoieUnGagnant(){
 	return(leMeilleur);
 }
 
-void afficheUnGagnant(Gagnant G){
-	printf("%i\n", G.annee);
-	printf("%s\n", G.nom);
-	printf("%s\n", G.travaux);
+Gagnant *readWinners(int nbGagnants){
+	Gagnant *tab;
+	tab=calloc(nbGagnants, sizeof(Gagnant));
+	for(int k=0; k<nbGagnants; k++){
+		Gagnant *nouveau;
+		nouveau=malloc(sizeof(Gagnant));
+		nouveau=renvoieUnGagnant();
+		tab[k]=*nouveau;
+		free(nouveau);
+	}
+	return(tab);
 }
-
-Gagnant[50] readWinners(){
 	
+void printWinners(Gagnant *listeGagnants, int nbGagnants){
+	for(int k=0; k<nbGagnants; k++){
+		printf("%i\n", listeGagnants[k].annee);
+		printf("%s\n", listeGagnants[k].nom);
+		printf("%s\n", listeGagnants[k].travaux);
+	}
+}
 
 int main(void)
 {
@@ -75,10 +88,12 @@ int main(void)
 	int nbGagnants = scanLineAsInt();
 	printf("nbGagnants = %i\n",nbGagnants);
 	
-	Gagnant *test;
-	test = renvoieUnGagnant();
-	afficheUnGagnant(*test);
-	free(test);
+	Gagnant *listeGagnants;
+	listeGagnants=readWinners(nbGagnants);
+	printWinners(listeGagnants, nbGagnants);
+	
+	free(listeGagnants);
+	// free
 	
 	return EXIT_SUCCESS;
 }

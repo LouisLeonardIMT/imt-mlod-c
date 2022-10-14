@@ -51,30 +51,17 @@ typedef struct{
 	char* travaux;
 } Gagnant;
 
-/*void readWinner(Gagnant *G){
-	G->annee=scanAsInt();
+void readWinner(Gagnant *G){
+	G->annee=scanLineAsInt();
 	G->nom=scanLine();
 	G->travaux=scanLine();
-}
-*/
-
-Gagnant *renvoieUnGagnant(){
-	Gagnant *leMeilleur;
-	leMeilleur=malloc(sizeof(Gagnant));
-	leMeilleur->annee=scanLineAsInt();
-	leMeilleur->nom=scanLine();
-	leMeilleur->travaux=scanLine();
-	return(leMeilleur);
 }
 
 Gagnant *readWinners(int nbGagnants){
 	Gagnant *tab;
 	tab=malloc(nbGagnants*sizeof(Gagnant));
 	for(int k=0; k<nbGagnants; k++){
-		Gagnant *nouveau;
-		nouveau=renvoieUnGagnant();
-		tab[k]=*nouveau;
-		free(nouveau);
+		readWinner(&tab[k]);
 	}
 	return(tab);
 }
@@ -101,6 +88,20 @@ void infosAnnee(Gagnant listeGagnants[], int Annee, int nbGagnants){
 	}
 }
 
+void sortTuringWinnersByYear(Gagnant *l, int nbGagnants){
+	int i, j;
+	Gagnant tmp;
+	for(i=0; i<nbGagnants; i++){
+		j=i;
+		while(j>0 && l[j-1].annee>l[j].annee){
+			tmp=l[j];
+			l[j]=l[j-1];
+			l[j-1]=tmp;
+			j--;
+		}
+	}
+}
+
 int main(void)
 {
 
@@ -109,10 +110,15 @@ int main(void)
 	
 	Gagnant *listeGagnants;
 	listeGagnants=readWinners(nbGagnants);
+	
+	sortTuringWinnersByYear(listeGagnants, nbGagnants);
 	printWinners(listeGagnants, nbGagnants);
-	infosAnnee(listeGagnants, 1985, nbGagnants);
 	
 	// free
+	for(int k=0; k<nbGagnants; k++){
+		free(listeGagnants[k].nom);
+		free(listeGagnants[k].travaux);
+	}
 	free(listeGagnants);	
 	return EXIT_SUCCESS;
 }

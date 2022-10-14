@@ -51,6 +51,12 @@ typedef struct{
 	char* travaux;
 } Gagnant;
 
+/*void readWinner(Gagnant *G){
+	G->annee=scanAsInt();
+	G->nom=scanLine();
+	G->travaux=scanLine();
+}
+*/
 
 Gagnant *renvoieUnGagnant(){
 	Gagnant *leMeilleur;
@@ -63,10 +69,9 @@ Gagnant *renvoieUnGagnant(){
 
 Gagnant *readWinners(int nbGagnants){
 	Gagnant *tab;
-	tab=calloc(nbGagnants, sizeof(Gagnant));
+	tab=malloc(nbGagnants*sizeof(Gagnant));
 	for(int k=0; k<nbGagnants; k++){
 		Gagnant *nouveau;
-		nouveau=malloc(sizeof(Gagnant));
 		nouveau=renvoieUnGagnant();
 		tab[k]=*nouveau;
 		free(nouveau);
@@ -82,6 +87,20 @@ void printWinners(Gagnant *listeGagnants, int nbGagnants){
 	}
 }
 
+void infosAnnee(Gagnant listeGagnants[], int Annee, int nbGagnants){
+	int i=0;
+	while((listeGagnants[i].annee!=Annee) && (i < nbGagnants)){
+		i++;
+	}
+	if(i==nbGagnants){
+		printf("Année non valide.");
+	}
+	else{
+		printf("L'année %i, le(s) gagnant(s) ont été : %s\n", Annee, listeGagnants[i].nom);
+		printf("Nature des travaux : %s", listeGagnants[i].travaux);
+	}
+}
+
 int main(void)
 {
 
@@ -91,9 +110,9 @@ int main(void)
 	Gagnant *listeGagnants;
 	listeGagnants=readWinners(nbGagnants);
 	printWinners(listeGagnants, nbGagnants);
+	infosAnnee(listeGagnants, 1985, nbGagnants);
 	
-	free(listeGagnants);
 	// free
-	
+	free(listeGagnants);	
 	return EXIT_SUCCESS;
 }

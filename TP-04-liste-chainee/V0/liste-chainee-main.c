@@ -23,7 +23,7 @@ int main(void){
 
 	afficheListe_i(l);
 
-	/*ajoutFin_r(99,l);
+	ajoutFin_r(99,l);
 	afficheListe_i(l);
 
 	ajoutFin_r(100,l);
@@ -78,7 +78,7 @@ int main(void){
 	afficheListe_r(l);
 
 	detruire_r(l);
-	*/
+	
 
 	return EXIT_SUCCESS;
 }

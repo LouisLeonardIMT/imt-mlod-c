@@ -1,18 +1,16 @@
-#include "linkedList.h"
+#include "linkedListOfMusic.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <errno.h>
 
-typedef struct {
-	char* Name;
-	char* Artist;
-	char* Album;
-	char* Genre;
-	unsigned int DiscNumb;
-	unsigned int TrackNumb;
-	unsigned int Year;
-	} Music;
-
+Music* lineAsMusic(char* line){
+	Music* newMusic = malloc(sizeof(Music));
+	char* string;
+	string = strdup(line);
+	newMusic->Name = strsep(string, ",");
+	//pas fini
+	
 
 void afficheElement(Element e) {
 	printf("%s ",((Music*) e)->Name);
@@ -26,6 +24,7 @@ void afficheElement(Element e) {
 
 void detruireElement(Element e){
 	free((Music*)e);
+	// possiblement d'autres free sont nécessaires
 }
 
 bool equalsElement(Element e1, Element e2){
@@ -35,5 +34,5 @@ bool equalsElement(Element e1, Element e2){
 		&& strcmp(((Music*)e1)->Genre,((Music*)e2)->Genre)==0
 		&& ((Music*)e1)->DiscNumb==((Music*)e2)->DiscNumb
 		&& ((Music*)e1)->TrackNumb==((Music*)e2)->TrackNumb
-		&& ((Music*)e1)->Year==((Music*)e2)->Year)
+		&& ((Music*)e1)->Year==((Music*)e2)->Year);
 }

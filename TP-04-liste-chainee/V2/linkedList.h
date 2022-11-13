@@ -50,6 +50,7 @@ Liste ajoutFin_i(Element v, Liste l);
 // version recursive
 Liste ajoutFin_r(Element v, Liste l);
 
+// compare deux éléments
 extern bool equalsElement(Element e1, Element e2);
 
 // Retourne un pointeur sur l'élément de la liste l contenant la valeur v ou NULL

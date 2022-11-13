@@ -1,30 +1,26 @@
+#include "linkedList.h"
 #include "linkedListOfMusic.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
 
-Music* lineAsMusic(char* line){
-	Music* newMusic = malloc(sizeof(Music));
-	char* string;
-	string = strdup(line);
-	newMusic->Name = strsep(string, ",");
-	//pas fini
-	
-
 void afficheElement(Element e) {
-	printf("%s ",((Music*) e)->Name);
-	printf("%s ",((Music*) e)->Artist);
-	printf("%s ",((Music*) e)->Album);
-	printf("%s ",((Music*) e)->Genre);
-	printf("%i ",((Music*) e)->DiscNumb);
-	printf("%i ",((Music*) e)->TrackNumb);
-	printf("%i ",((Music*) e)->Year);
+	printf("%s - ",((Music*) e)->Name);
+	printf("%s - ",((Music*) e)->Artist);
+	printf("%s - ",((Music*) e)->Album);
+	printf("%s - ",((Music*) e)->Genre);
+	printf("%i - ",((Music*) e)->DiscNumb);
+	printf("%i - ",((Music*) e)->TrackNumb);
+	printf("%i",((Music*) e)->Year);
 }
 
 void detruireElement(Element e){
-	free((Music*)e);
-	// possiblement d'autres free sont nécessaires
+	free (((Music *)e)->Name);
+    	free (((Music *)e)->Artist);
+    	free (((Music *)e)->Album);
+    	free (((Music *)e)->Genre);
+    	free ((Music*)e);
 }
 
 bool equalsElement(Element e1, Element e2){

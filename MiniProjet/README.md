@@ -26,7 +26,7 @@ Appuyer sur P pour faire une pause, et réappuyer pour relancer le jeu.
 
 # URL vidée de démo
 
-TODO
+https://youtu.be/2IcpwTsPC-M
 
 # Quelques détails sur votre implémentation
 
